@@ -1,0 +1,29 @@
+{
+  "name": "parcel-plugin-local",
+  "version": "1.0.0",
+  "description": "use local js file as parcel plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lovetingyuan/parcel-plugin-local.git"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "keywords": [
+    "parcel",
+    "plugin",
+    "local",
+    "custom",
+    "plugins"
+  ],
+  "author": "tingyuan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lovetingyuan/parcel-plugin-local/issues"
+  },
+  "homepage": "https://github.com/lovetingyuan/parcel-plugin-local#readme"
+}
