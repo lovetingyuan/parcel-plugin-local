@@ -1,11 +1,14 @@
 const path = require('path')
+const fs = require('fs')
 const name = require('./package.json').name
 
 const workspace = process.cwd()
 
 const err = msg => new Error(`[${name}]: ${msg}.`)
 
-let localPluginPath = path.join(workspace, 'parcel-plugin.js')
+let localPluginPath
+
+const defaultPluginPath = path.join(workspace, 'parcel-plugin.js')
 
 let workspacepkg
 
@@ -18,11 +21,17 @@ if (workspacepkg && typeof workspacepkg.localparcelplugin === 'string') {
 }
 
 module.exports = function localPlugin (bundler) {
-  try {
-    require.resolve(localPluginPath)
-  } catch (e) {
-    throw err(`${localPluginPath} is invalid, ${e.message}`)
+  if (localPluginPath) { // user assign
+    try {
+      require.resolve(localPluginPath)
+    } catch (e) {
+      throw err(`${localPluginPath} is invalid, ${e.message}`)
+    }
+  } else {
+    if (!fs.existsSync(defaultPluginPath)) return
+    localPluginPath = defaultPluginPath
   }
+
   const localPlugin = require(localPluginPath)
   if (typeof localPlugin !== 'function') {
     throw err(`${localPluginPath} must export a function as default value`)
