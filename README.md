@@ -27,3 +27,16 @@ you can configure local parcel plugin file path with field `localparcelplugin` i
 }
 ```
 
+### What if I want to use a single file as both plugin and asset transformer?
+Here is a trick...
+```
+class AnyExtAsset extends Asset { /* ... */ }
+module.exports = function (bundler) {
+  if (typeof bundler === 'object') {
+    bundler.addAssetType('anyext', __filename)
+  } else {
+    return new AnyExtAsset(...arguments)
+  }
+}
+
+```
